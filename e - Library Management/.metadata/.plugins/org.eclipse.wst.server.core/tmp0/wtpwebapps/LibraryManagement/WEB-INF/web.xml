@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" id="WebApp_ID" version="5.0">
+  <display-name>LibraryManagement</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>MyServlet</display-name>
+    <servlet-name>MyServlet</servlet-name>
+    <servlet-class>com.myPackage.MyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyServlet</servlet-name>
+    <url-pattern>/MyServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminLog</display-name>
+    <servlet-name>AdminLog</servlet-name>
+    <servlet-class>com.intern.inox.AdminLog</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminLog</servlet-name>
+    <url-pattern>/AdminLog</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddBook</display-name>
+    <servlet-name>AddBook</servlet-name>
+    <servlet-class>com.intern.inox.AddBook</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddBook</servlet-name>
+    <url-pattern>/AddBook</url-pattern>
+  </servlet-mapping>
+</web-app>

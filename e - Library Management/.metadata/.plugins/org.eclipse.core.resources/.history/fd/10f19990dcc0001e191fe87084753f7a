@@ -1,0 +1,32 @@
+<%
+   Object list = session.getAttribute("message1");
+
+   if (list != null && list instanceof List) {
+       List<String> bookDetails = (List<String>) list;
+%>
+
+<table class="table-light">
+  <thead>
+    <tr>
+      <th scope="col">Book id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Author</th>
+      <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= bookDetails.get(0) %></td>
+      <td><%= bookDetails.get(1) %></td>
+      <td><%= bookDetails.get(2) %></td>
+      <td><%= bookDetails.get(3) %></td>
+      <td><%= bookDetails.get(4) %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%
+      session.removeAttribute("message1");
+   }
+%>

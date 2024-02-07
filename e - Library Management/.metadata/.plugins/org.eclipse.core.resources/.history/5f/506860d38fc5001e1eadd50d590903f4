@@ -1,0 +1,78 @@
+package com.intern.Student;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+@WebServlet("/Student_fine")
+public class FineStudentData extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public FineStudentData() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		
+		String sid = request.getParameter("studentid");
+		System.out.println(sid + "yoy");
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LibraryManagementSystem",
+					"root", "W7301@jqir#");
+			
+			String query = "Select * from issue where s_id = ?"; 
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, sid);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				String issue = resultSet.getString("issue_date");
+				String returD = resultSet.getString("return_date");
+				
+				List<Object> list = new ArrayList<>();
+				list.add(issue);
+				list.add(returD);
+				
+				HttpSession httpSession = request.getSession();
+				httpSession.setAttribute("fineCollection", list);
+				response.sendRedirect("ViewDataInfoStudent.jsp");
+				return;
+			}else {
+				response.sendRedirect("ViewDataInfoStudent.jsp");
+			}
+			resultSet.close();
+			preparedStatement.close();
+			connection.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		doGet(request, response);
+	}
+
+}

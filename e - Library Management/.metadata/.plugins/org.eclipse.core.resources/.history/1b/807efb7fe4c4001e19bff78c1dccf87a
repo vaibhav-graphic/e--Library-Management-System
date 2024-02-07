@@ -1,0 +1,36 @@
+package com.intern.Student;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/student_register")
+public class StudentRegistertation extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public StudentRegistertation() {
+        super();
+    }
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		
+		String sid = request.getParameter("StudentId");
+		String sName = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		if(sid != null && sName != null && password != null) {
+			
+		}else {
+			response.sendRedirect("StudentRegister.jsp");
+		}
+	}
+
+}

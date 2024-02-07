@@ -1,0 +1,158 @@
+package com.intern.Student;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+@WebServlet("/studentreturning")
+public class StudentReturnBook extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	public StudentReturnBook() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		response.setContentType("text/html");
+		String s_id = "";
+		Cookie[] cookies = request.getCookies();
+		for (Cookie cookie : cookies) {
+		    if ("StudetnId".equals(cookie.getName())) {
+		        s_id = cookie.getValue();
+		        break; 
+		    }
+		}
+
+//		System.out.println(s_id);
+		String bookname = "";
+		String author = "";
+		String book_id = "";
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LibraryManagementSystem",
+					"root", "W7301@jqir#");
+
+			String query = "Select * from issue where s_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, s_id);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				book_id = resultSet.getString("book_id");
+
+				String query2 = "Select * from book  where bood_id = ?";
+
+				PreparedStatement preparedStatement2 = connection.prepareStatement(query2);
+				preparedStatement2.setString(1, book_id);
+
+				ResultSet resultSet2 = preparedStatement2.executeQuery();
+
+				if (resultSet2.next()) {
+					bookname = resultSet2.getString("title");
+					author = resultSet2.getString("author");
+
+					List<Object> list = new ArrayList<>();
+					list.add(s_id);
+					list.add(bookname);
+					list.add(author);
+					list.add(book_id);
+					HttpSession httpSession = request.getSession();
+					httpSession.setAttribute("S_R_table", list);
+					response.sendRedirect("StudentReturn.jsp");
+					return;
+				}
+				preparedStatement2.close();
+				resultSet2.close();
+			} else {
+				response.sendRedirect("StudentReturn.jsp");
+			}
+			resultSet.close();
+			preparedStatement.close();
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("text/html");
+		
+		String s_id = request.getParameter("s_id");
+		String book_id = request.getParameter("book_id");
+		System.out.println(s_id + " " + book_id);
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LibraryManagementSystem",
+					"root", "W7301@jqir#");
+			
+			String deleteIssueQuery = "DELETE FROM issue WHERE book_id = ? AND s_id = ?";
+	        String updateBookQuantityQuery = "UPDATE book SET quantity = quantity + 1 WHERE bood_id = ?";
+	        
+	        try {
+	        	PreparedStatement preparedStatement = connection.prepareStatement(deleteIssueQuery);
+	        	preparedStatement.setString(1, book_id);
+	        	preparedStatement.setString(2, s_id);
+	        	
+	        	int row = preparedStatement.executeUpdate();
+	        	
+	        	if(row > 0) {
+	        		System.out.println("done");
+	        	}else {
+	        		System.out.println("fail");
+	        	}
+	        	preparedStatement.close();
+	        }catch (SQLException e) {
+				e.printStackTrace();
+			}
+	        
+	        try {
+	        	PreparedStatement preparedStatement = connection.prepareStatement(updateBookQuantityQuery);
+	        	preparedStatement.setString(1, book_id);
+	        	
+	        	int row = preparedStatement.executeUpdate();
+	        	if(row > 0) {
+	        		System.out.println("done1");
+	        	}else {
+	        		System.out.println("fail1");
+	        	}
+	        	preparedStatement.close();
+	        }catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

@@ -1,0 +1,64 @@
+package com.intern.Student;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+@WebServlet("/studentreturning")
+public class StudentReturnBook extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public StudentReturnBook() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		
+		String studentid = request.getParameter("s_id");
+		String book_id = "";
+		String bookName = request.getParameter("book_name");
+
+		System.out.println(studentid +" "+ bookName + "" + book_id);
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LibraryManagementSystem",
+					"root", "W7301@jqir#");
+			String query = "Select * from book where title = ?";
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, bookName);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				String bood_id = resultSet.getString("bood_id");
+			}
+			resultSet.close();
+			preparedStatement.close();
+			connection.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(studentid +" "+ bookName + "" + book_id);
+	}
+
+}

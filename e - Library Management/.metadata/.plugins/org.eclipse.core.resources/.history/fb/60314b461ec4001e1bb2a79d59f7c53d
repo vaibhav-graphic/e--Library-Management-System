@@ -1,0 +1,32 @@
+package com.intern.Student;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/studentreturning")
+public class StudentReturnBook extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public StudentReturnBook() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		
+		Cookie[] cookies = request.getCookies();
+		String studentid = cookies[0].getValue();
+		String bookName = cookies[1].getValue();
+		
+		System.out.println(studentid +" "+ bookName);
+	}
+
+}

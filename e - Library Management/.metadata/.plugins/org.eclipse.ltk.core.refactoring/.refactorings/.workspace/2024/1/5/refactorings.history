@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;LibraryManagement/src/main/webapp/DashBorad.html&apos;" deleteContents="false" description="Delete resource &apos;LibraryManagement/src/main/webapp/DashBorad.html&apos;" element1="/LibraryManagement/src/main/webapp/DashBorad.html" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1706703817646"/>&#x0A;<refactoring comment="Rename resource &apos;youtube&apos; to &apos;ELibraryManagementSystem&apos;" description="Rename resource &apos;youtube&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/youtube" name="ELibraryManagementSystem" stamp="1706706100042" updateReferences="true"/>
+</session>

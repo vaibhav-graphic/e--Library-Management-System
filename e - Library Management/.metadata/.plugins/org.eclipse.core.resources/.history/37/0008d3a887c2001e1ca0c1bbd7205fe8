@@ -1,0 +1,52 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.Connection, java.sql.PreparedStatement, java.sql.ResultSet, java.sql.SQLException, java.util.List, java.util.ArrayList" %>
+
+
+<html>
+<head>
+    <title>Book Search and Order</title>
+    <!-- Add your CSS and Bootstrap links here -->
+</head>
+<body>
+
+
+<div class="container">
+    <h1>Book Search and Order</h1>
+
+    <form action="SearchBook.jsp" method="get">
+        <label for="bookName">Book Name:</label>
+        <input type="text" id="bookName" name="bookName" required>
+
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required>
+
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <hr>
+
+   
+            </select>
+
+            <label for="studentId">Student ID:</label>
+            <input type="text" id="studentId" name="studentId" required>
+
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" required>
+
+            <label for="issueDate">Issue Date:</label>
+            <input type="date" id="issueDate" name="issueDate" required>
+
+            <label for="returnDate">Return Date:</label>
+            <input type="date" id="returnDate" name="returnDate" required>
+
+            <button type="submit" class="btn btn-success">Place Order</button>
+        </form>
+   
+</div>
+
+
+</body>
+</html>
+    

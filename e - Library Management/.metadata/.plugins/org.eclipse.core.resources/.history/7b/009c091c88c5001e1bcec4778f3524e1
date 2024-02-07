@@ -1,0 +1,10 @@
+<%@page import="java.util.List"%>
+<%
+	List list = (List) session.getAttribute("fineCollection");
+	if(list != null){
+%>
+
+
+<%
+	}
+%>

@@ -1,0 +1,23 @@
+<%
+	double fine = (double) session.getAttribute("fine");
+	if(fine != null){
+%>
+	<div class="container">
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+            <div class="card">
+                <div class="card-header">
+                    Fine Calculation
+                </div>
+                <div class="card-body">
+                    <!-- Fine calculation result -->
+                    <p>Total Fine: $<%= fine %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%
+	session.removeAttribute("fine");
+	}
+%>

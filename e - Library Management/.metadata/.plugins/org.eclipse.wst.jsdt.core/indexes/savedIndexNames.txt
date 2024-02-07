@@ -1,0 +1,10 @@
+INDEX VERSION 1.4+A:\Intership\e - Library Management\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+403270917.index
+2819325338.index
+468916598.index
+871927944.index
+718098946.index
+246646193.index
+2667787755.index
+2365447293.index
+871927944.index

@@ -1,0 +1,116 @@
+html,body {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1262px;
+    height: 702px;
+    flex-shrink: 0;
+    background: lightgray url("https://s3-alpha-sig.figma.com/img/e7eb/6368/a7cac72277732da0036000ef3b3c6074?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UAW69vqfFRHveHs3-maAcKbH2~XlmhLBcYwTGRwwsulq~9zYjqLlT1hUNorGQYrf6KiAHwLXbwqKdpgPIenRM~cCrG5KAfU28v90UH1PakDKh1w8MS2fxAY36tbBUaex9ph3huAmEro4JXvl73rMrYwzs1dQTJFxeFYAQXSfYgzCrxTcMzuVRCpy~yxilHp93bCQo2CFgSOovrnp26uuAqIyjewlyLDub3UfHKf-jv4BuwtFSY4KxgUMXoVvsq6kH74LUBLIEFI9DQ9dvlLnl-tPmqJjvO4mEPpuiq2ne9iC-89QPlLurv73ByjH1vc0ggEnXY46U08nIRNRvGpFYw__") 50% / cover no-repeat;
+    border: 1px solid #000;
+    opacity: 0.7;
+    box-shadow: 0px 50px 4px 0px rgba(0, 0, 0, 0.25);
+}
+h1{
+    width: 1027px;
+    color: #F5F5F5;
+    font-family: Inter;
+    font-size: 128px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: url("https://s3-alpha-sig.figma.com/img/212b/d3d3/999fcd49b8b86b27315bddd6a9e74a83?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YqAzujfrktWoOfNE6Wjo8MoOpkQ0P9fEYbZ-4YeFUrproRHzVHduZ0QJ4v5cUUNRib3fn7wtV88KQiKiCLA-DWqbA6SnMrB9z2g3IiNmu3cgQ4zhGUgmvCImgVlrEYSlbt2JYIIrn~VBqXxrYsmumTusxGrsNV4HwHL3OhunQGVdQ44qp5R8EKwihIgpWknZf3nT12YCd4M~AliP2pr5d8qe-H5SCUMOdZTxxSU0YTIFx8-LYtV6jiLfwSixUjd4TDsWBCcDNZBnaq4RsXXhTGo9isElVnDniiSsS-JR4jrc4MzQc~3L4RFvSGo-Wcg25SUTUcRXqRINhYQ~-01~Bw__"), lightgray 50% / cover no-repeat;
+}
+
+#container3{
+    background-color: rgba(100, 151, 99, 0.99);
+}
+.card{
+    background-color: rgba(100, 151, 99, 0.99);
+}
+#adminHomeimg{
+    width: 219px;
+    height: 169px;
+    flex-shrink: 0;
+}
+#studentHomeimg{
+    width: 151px;
+    height: 170px;
+    flex-shrink: 0;
+}
+.card-link{
+    color: #000;
+    font-family: Inter;
+    font-size: 96px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: normal;
+}
+
+/* admin home page */
+#container3Part2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(51, 111, 119, 0.99);
+}
+#leftImg{
+    width: 427px;
+    height: 319px;
+    flex-shrink: 0;
+    padding-top: 19px;
+    padding-bottom: 19px;
+}
+
+h4{
+    width: 330px;
+    height: 99px;
+    flex-shrink: 0;
+}
+
+/* dashbord */
+#DashBordButton{
+    width: 386px;
+    height: 102px;
+    flex-shrink: 0;
+    border-radius: 100px;
+    background: #AF8F8F;
+    box-shadow: 0px 20px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+#DashBordButtontext{
+    width: 396px;
+    height: 54px;
+    flex-shrink: 0;
+    color: #000;
+font-family: Inter;
+font-size: 55px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+/* main AddBook page */
+#mainBookPage{
+    width: 211px;
+    height: 99px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: rgba(29, 2, 33, 0.58);
+    box-shadow: 0px 20px 4px 0px rgba(0, 0, 0, 0.25);
+}
+h6{
+    width: 182px;
+    height: 56px;
+    flex-shrink: 0;
+    color: #F5F5F5;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}

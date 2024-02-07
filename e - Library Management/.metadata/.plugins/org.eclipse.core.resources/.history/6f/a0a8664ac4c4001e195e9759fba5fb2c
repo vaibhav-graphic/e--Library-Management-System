@@ -1,0 +1,81 @@
+package com.intern.Student;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+@WebServlet("/studentreturning")
+public class StudentReturnBook extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public StudentReturnBook() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		
+		Cookie[] cookies = request.getCookies();
+		String s_id = cookies[0].getValue();
+		String bookname = "";
+		String author = "";
+		String book_id = ""; 
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+			
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LibraryManagementSystem",
+					"root", "W7301@jqir#");
+			
+			String query = "Select * from issue where s_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, s_id);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				book_id = resultSet.getString("book_id");
+				
+				String query2 = "Select * from book  where bood_id = ?";
+				
+				PreparedStatement preparedStatement2 = connection.prepareStatement(query2);
+				preparedStatement.setString(1, book_id);
+				
+				ResultSet resultSet2 = preparedStatement2.executeQuery();
+				
+				if(resultSet2.next()) {
+					bookname = resultSet2.getString("title");
+					author = resultSet2.getString("author");
+				}
+				preparedStatement2.close();
+				resultSet2.close();
+			}else {
+				response.sendRedirect("Student.jsp");
+			}
+			resultSet.close();
+			preparedStatement.close();
+			connection.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
+		
+	}
+
+}

@@ -1,0 +1,87 @@
+package com.intern.inxx;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+/**
+ * Servlet implementation class AddBook
+ */
+@WebServlet("/AddBooks")
+public class AddBook extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AddBook() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter printWriter = response.getWriter();
+		response.setContentType("text/html");
+
+		String bookid = request.getParameter("inputBookid3");
+		String title = request.getParameter("inputTitle3");
+		String author = request.getParameter("inputAuthor3");
+		String cost = request.getParameter("inputCost3");
+		String quantity = request.getParameter("inputQuantity3");
+
+		System.out.println(bookid + " " + title + " " + author + " " + cost + " " + quantity + " ");
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LibraryManagementSystem",
+					"root", "W7301@jqir#");
+			Statement statement = connection.createStatement();
+			String query = "INSERT INTO book (bood_id, title, cost, quantity, author) VALUES (" + bookid + ",'" + title
+					+ "'," + cost + "," + quantity + ",'" + author + "'" + ");";
+			int rowAffected = statement.executeUpdate(query);
+
+			if (rowAffected > 0) {
+				printWriter.println("<html>");
+				printWriter.println("<head><title>Hello Servlet</title></head>");
+				printWriter.println("<body>");
+				printWriter.println("<h1>Hello from Servlet!</h1>");
+				printWriter.println("</body>");
+				printWriter.println("</html>");
+			} else {
+				System.out.println("no s");
+			}
+
+			statement.close();
+			connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		printWriter.close();
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
